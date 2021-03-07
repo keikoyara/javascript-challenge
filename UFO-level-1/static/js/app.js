@@ -8,6 +8,9 @@ var tbody = document.querySelector("tbody");
 var dateInput = document.querySelector('#datetime');
 var searchBtn = document.querySelector('#filter-btn');
 
+// Add event listener
+searchBtn.addEventListener("click", handleSearchButtonClick);
+
 function renderTable(){
     tbody.innerHTML= "";
 
@@ -22,6 +25,31 @@ function renderTable(){
             var cell = row.insertCell(j);
             cell.innerText = data[field];
         }
-    };
+    }
+}
+
+function handleSearchButtonClick(event){
+    // prevent refreshing page
+    event.preventDefault();
+
+    var filterDate = dateInput.value.trim();
+    if (filterDate != "") {
+        tableData= data.filter(function (data) {
+            var dataDate = data.datetime;
+            return dataDate === filterDate;
+        })
 };
+renderTable();
+}
+function resetData () {
+    tableData = data;
+    DataInput.value = "";
+
+    renderTable();
+}
+
+renderTable()
+
+
+
 
